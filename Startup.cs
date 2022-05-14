@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Split_IT.Data;
+using Split_IT.Repositories.ExpenseRepository;
+using Split_IT.Repositories.GroupRepository;
+using Split_IT.Repositories.UserRepository;
 
 namespace Split_IT
 {
@@ -36,7 +39,18 @@ namespace Split_IT
             });
 
             services.AddDbContext<ProjectContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SplitIT;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+
+            services.AddTransient<IExpenseRepository, ExpenseRepository>();
+            services.AddTransient<IGroupRepository, GroupRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
