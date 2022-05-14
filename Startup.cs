@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Split_IT.Data;
 
 namespace Split_IT
 {
@@ -32,6 +34,8 @@ namespace Split_IT
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Split_IT", Version = "v1" });
             });
+
+            services.AddDbContext<ProjectContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SplitIT;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
