@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Split_IT.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,11 @@ namespace Split_IT.Entities.DTOs
         public float Owes { get; set; }
         public float Owed { get; set; }
 
-        public List<User> FriendList { get; set; }
 
+        public List<Friendship> FriendWith { get; set; }
+        public List<Friendship> FriendOf { get; set; }
         public List<UserGroup> Groups { get; set; }
+        public List<AmountOwed> AmountsOwed { get; set; }
 
 
         public UserDTO(User user)
@@ -30,8 +33,10 @@ namespace Split_IT.Entities.DTOs
             this.WalletFunds = user.WalletFunds;
             this.Owes = user.Owes;
             this.Owed = user.Owed;
-            this.FriendList = new List<User>();
+            this.FriendWith = new List<Friendship>();
+            this.FriendOf = new List<Friendship>();
             this.Groups = new List<UserGroup>();
+            this.AmountsOwed = new List<AmountOwed>();
         }
     }
 }

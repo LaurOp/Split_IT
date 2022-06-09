@@ -40,6 +40,7 @@ namespace Split_IT
 
             services.AddDbContext<ProjectContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SplitIT;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
+
             services.AddTransient<IExpenseRepository, ExpenseRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

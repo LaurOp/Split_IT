@@ -13,9 +13,6 @@ namespace Split_IT.Repositories.ExpenseRepository
     {
         public ExpenseRepository(ProjectContext context) : base(context) { }
 
-        public async Task<Expense> GetByGroupId(int id)
-        {
-            return await _context.Expenses.Where(e => e.GroupId == id).FirstOrDefaultAsync();
-        }
+        
     }
 }

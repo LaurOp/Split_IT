@@ -19,31 +19,6 @@ namespace Split_IT.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MyFloat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ExpenseId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Number")
-                        .HasColumnType("real");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpenseId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("MyFloat");
-                });
-
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
                     b.Property<int>("Id")
@@ -82,6 +57,51 @@ namespace Split_IT.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("Split_IT.Entities.Models.AmountOwed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpenseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpenseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AmountsOwed");
+                });
+
+            modelBuilder.Entity("Split_IT.Entities.Models.Friendship", b =>
+                {
+                    b.Property<int>("FromId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FromId", "ToId");
+
+                    b.HasIndex("ToId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Friendships");
+                });
+
             modelBuilder.Entity("Split_IT.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -101,9 +121,6 @@ namespace Split_IT.Migrations
                     b.Property<int>("PermissionLevel")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
@@ -111,8 +128,6 @@ namespace Split_IT.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Users");
                 });
@@ -132,19 +147,6 @@ namespace Split_IT.Migrations
                     b.ToTable("UserGroups");
                 });
 
-            modelBuilder.Entity("MyFloat", b =>
-                {
-                    b.HasOne("Split_IT.Entities.Expense", null)
-                        .WithMany("ratios")
-                        .HasForeignKey("ExpenseId");
-
-                    b.HasOne("Split_IT.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
                     b.HasOne("Split_IT.Entities.Group", "Group")
@@ -156,11 +158,46 @@ namespace Split_IT.Migrations
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("Split_IT.Entities.User", b =>
+            modelBuilder.Entity("Split_IT.Entities.Models.AmountOwed", b =>
                 {
+                    b.HasOne("Split_IT.Entities.Expense", "Expense")
+                        .WithMany("AmountsOwed")
+                        .HasForeignKey("ExpenseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Split_IT.Entities.User", "User")
+                        .WithMany("AmountsOwed")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Expense");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Split_IT.Entities.Models.Friendship", b =>
+                {
+                    b.HasOne("Split_IT.Entities.User", "UserFrom")
+                        .WithMany()
+                        .HasForeignKey("FromId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Split_IT.Entities.User", "UserTo")
+                        .WithMany("FriendWith")
+                        .HasForeignKey("ToId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Split_IT.Entities.User", null)
-                        .WithMany("FriendList")
+                        .WithMany("FriendOf")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("UserFrom");
+
+                    b.Navigation("UserTo");
                 });
 
             modelBuilder.Entity("Split_IT.Entities.UserGroup", b =>
@@ -184,7 +221,7 @@ namespace Split_IT.Migrations
 
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
-                    b.Navigation("ratios");
+                    b.Navigation("AmountsOwed");
                 });
 
             modelBuilder.Entity("Split_IT.Entities.Group", b =>
@@ -196,7 +233,11 @@ namespace Split_IT.Migrations
 
             modelBuilder.Entity("Split_IT.Entities.User", b =>
                 {
-                    b.Navigation("FriendList");
+                    b.Navigation("AmountsOwed");
+
+                    b.Navigation("FriendOf");
+
+                    b.Navigation("FriendWith");
 
                     b.Navigation("Groups");
                 });
