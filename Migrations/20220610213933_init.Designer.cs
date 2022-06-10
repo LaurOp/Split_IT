@@ -10,7 +10,7 @@ using Split_IT.Data;
 namespace Split_IT.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20220609153140_init")]
+    [Migration("20220610213933_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
