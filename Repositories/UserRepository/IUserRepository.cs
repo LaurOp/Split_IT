@@ -9,5 +9,12 @@ namespace Split_IT.Repositories.UserRepository
 {
     interface IUserRepository : IGenericRepository<User>
     {
+        Task<User> GetByName(string name);
+        Task<List<User>> GetAllUsers();
+        Task<User> GetById(int id);
+        Task<User> GetByIdWithAll(int id);
+        Task<User> GetByIdWithOwed(int id);
+        Task<User> GetByIdWithFriends(int id);
+        Task<User> GetByIdWithGroups(int id);
     }
 }

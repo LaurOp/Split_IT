@@ -12,6 +12,9 @@ namespace Split_IT.Repositories.ExpenseRepository
     interface IExpenseRepository : IGenericRepository<Expense>
     {
 
-       // Task<Expense> GetByGroupId(int id);
+        Task<Expense> GetByGroupId(int groupId);
+        Task<Expense> GetById(int id);
+        Task<Expense> GetByIdWithAmounts(int id);
+
     }
 }
