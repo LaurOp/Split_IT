@@ -7,7 +7,7 @@ using Split_IT.Repositories.GenericRepository;
 
 namespace Split_IT.Repositories.UserRepository
 {
-    interface IUserRepository : IGenericRepository<User>
+    public interface IUserRepository : IGenericRepository<User>
     {
         Task<User> GetByName(string name);
         Task<List<User>> GetAllUsers();

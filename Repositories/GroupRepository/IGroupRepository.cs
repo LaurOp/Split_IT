@@ -7,7 +7,7 @@ using Split_IT.Repositories.GenericRepository;
 
 namespace Split_IT.Repositories.GroupRepository
 {
-    interface IGroupRepository : IGenericRepository<Group>
+    public interface IGroupRepository : IGenericRepository<Group>
     {
 
 

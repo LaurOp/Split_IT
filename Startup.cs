@@ -50,6 +50,21 @@ namespace Split_IT
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+
+
+            // REPOSITORIES:
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IGroupRepository, GroupRepository>();
+            services.AddTransient<IExpenseRepository, ExpenseRepository>();
+
+
+            services.AddControllers().AddNewtonsoftJson();
+
+
+
+
+
         }
 
 
@@ -67,12 +82,22 @@ namespace Split_IT
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            /*try
+            {
+                seed.SeedRoles().Wait();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }*/
         }
     }
 }

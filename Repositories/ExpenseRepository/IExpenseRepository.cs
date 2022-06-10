@@ -9,7 +9,7 @@ namespace Split_IT.Repositories.ExpenseRepository
 {
 
 
-    interface IExpenseRepository : IGenericRepository<Expense>
+    public interface IExpenseRepository : IGenericRepository<Expense>
     {
 
         Task<Expense> GetByGroupId(int groupId);
