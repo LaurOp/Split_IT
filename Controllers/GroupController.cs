@@ -39,6 +39,29 @@ namespace Split_IT.Controllers
             return Ok(groupsToReturn);
         }
 
+        [HttpGet("user={user}")]
+        public async Task<IActionResult> GetAllGroupsByUserId(int user)
+        {
+            var allGroups = await _repository.GetAllGroups();
+            var groupsToReturn = new List<GroupDTO>();
+
+            foreach (var group in allGroups)
+            {
+                var itsUsers = group.Users;
+                foreach (var itsUser in itsUsers)
+                {
+                    if (itsUser.UserId == user)
+                    {
+                        groupsToReturn.Add(new GroupDTO(group));
+                        break;
+                    }
+                }
+
+            }
+
+            return Ok(groupsToReturn);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateGroup(CreateGroupDTO dto)
