@@ -16,6 +16,8 @@ using Split_IT.Data;
 using Split_IT.Repositories.ExpenseRepository;
 using Split_IT.Repositories.GroupRepository;
 using Split_IT.Repositories.UserRepository;
+using Split_IT.Repositories.FriendshipManager;
+using Split_IT.Repositories.UserGroupRepository;
 
 namespace Split_IT
 {
@@ -44,6 +46,8 @@ namespace Split_IT
             services.AddTransient<IExpenseRepository, ExpenseRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IFriendshipRepository, FriendshipRepository>();
+            services.AddTransient<IUserGroupRepository, UserGroupRepository>();
 
 
             services.AddControllersWithViews()

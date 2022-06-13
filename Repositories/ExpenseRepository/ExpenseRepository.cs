@@ -13,9 +13,23 @@ namespace Split_IT.Repositories.ExpenseRepository
     {
         public ExpenseRepository(ProjectContext context) : base(context) { }
 
+<<<<<<< Updated upstream
         public async Task<Expense> GetByGroupId(int groupId)
+=======
+        public async Task<List<Expense>> GetAllExpenses()
         {
-            return await _context.Expenses.Where(e => e.GroupId == groupId).FirstOrDefaultAsync();
+            return await _context.Expenses.ToListAsync();
+        }
+
+        public async Task<List<Expense>> GetByGroupId(int groupId)
+>>>>>>> Stashed changes
+        {
+            return await _context.Expenses.Where(e => e.GroupId == groupId).ToListAsync();
+        }
+
+        public async Task<Expense> GetByGroupIdAndByAmount(int groupId, float amount)
+        {
+            return await _context.Expenses.Where(e => e.GroupId == groupId && e.totalAmount == amount).FirstOrDefaultAsync();
         }
 
         public async Task<Expense> GetById(int id)
