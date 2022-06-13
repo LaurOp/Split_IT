@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Split_IT.Entities;
+using Split_IT.Entities.DTOs;
 using Split_IT.Repositories.ExpenseRepository;
 using Split_IT.Repositories.GroupRepository;
 using Split_IT.Repositories.UserRepository;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Split_IT.Controllers
 {
@@ -19,9 +23,7 @@ namespace Split_IT.Controllers
             _userRepository = userRepository;
             _groupRepository = groupRepository;
         }
-
-<<<<<<< Updated upstream
-=======
+        
         [HttpGet]
         public async Task<IActionResult> GetAllExpenses()
         {
@@ -123,7 +125,7 @@ namespace Split_IT.Controllers
 
 
 
->>>>>>> Stashed changes
+
 
     }
 }

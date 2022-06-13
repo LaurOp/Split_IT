@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Proiect_final_DAW.Entities;
 using Split_IT.Entities;
 using Split_IT.Entities.Models;
 
 namespace Split_IT.Data
 {
-    public class ProjectContext : DbContext/*: IdentityDbContext<User, Role, string, IdentityUserClaim<string>,
-        UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>*/
+    public class ProjectContext : IdentityDbContext<UserAuth, Role, string, IdentityUserClaim<string>,
+        UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
 
 

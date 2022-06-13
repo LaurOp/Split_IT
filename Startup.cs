@@ -16,8 +16,18 @@ using Split_IT.Data;
 using Split_IT.Repositories.ExpenseRepository;
 using Split_IT.Repositories.GroupRepository;
 using Split_IT.Repositories.UserRepository;
+
 using Split_IT.Repositories.FriendshipManager;
 using Split_IT.Repositories.UserGroupRepository;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Split_IT.Entities;
+using Split_IT.Managers;
+using Proiect_final_DAW.Entities;
+using Split_IT.Entities.Models;
+
 
 namespace Split_IT
 {
@@ -62,6 +72,34 @@ namespace Split_IT
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<IExpenseRepository, ExpenseRepository>();
 
+            services.AddTransient<IAuthenticationManager, AuthenticationManager>();
+            services.AddTransient<ITokenManager, TokenManager>();
+
+            services.AddIdentity<UserAuth, Role>()
+                .AddEntityFrameworkStores<ProjectContext>();
+
+            services
+                .AddAuthentication(options =>
+                {
+
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer("AuthScheme", options =>
+                {
+                    options.SaveToken = true;
+                    var secret = Configuration.GetSection("Jwt").GetSection("SecretKey").Get<String>();
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateLifetime = true,
+                        RequireExpirationTime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
 
             services.AddControllers().AddNewtonsoftJson();
 
