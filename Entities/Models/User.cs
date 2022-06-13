@@ -24,6 +24,14 @@ namespace Split_IT.Entities
         public ICollection<UserGroup> Groups { get; set; }
         public ICollection<AmountOwed> AmountsOwed { get; set; }
 
+        public User()
+        {
+            FriendOf = new List<Friendship>();
+            FriendWith = new List<Friendship>();
+            Groups = new List<UserGroup>();
+            AmountsOwed = new List<AmountOwed>();
+        }
+
 
     }
 }

@@ -12,5 +12,15 @@ namespace Split_IT.Entities
 
         public int GroupId { get; set; }
         public Group Group { get; set; }
+
+        public UserGroup(int userId, User user, int groupId, Group group)
+        {
+            UserId = userId;
+            User = user;
+            GroupId = groupId;
+            Group = group;
+        }
+
+        public UserGroup() { }
     }
 }

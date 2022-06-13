@@ -38,5 +38,6 @@ namespace Split_IT.Entities.DTOs
             this.Groups = new List<UserGroup>();
             this.AmountsOwed = new List<AmountOwed>();
         }
+
     }
 }

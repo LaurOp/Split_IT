@@ -11,7 +11,7 @@ namespace Split_IT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpenseController : Controller
+    public class ExpenseController : ControllerBase
     {
         private readonly IExpenseRepository _repository;
         private readonly IUserRepository _userRepository;
@@ -23,7 +23,7 @@ namespace Split_IT.Controllers
             _userRepository = userRepository;
             _groupRepository = groupRepository;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> GetAllExpenses()
         {
@@ -76,6 +76,53 @@ namespace Split_IT.Controllers
             return Ok(new ExpenseDTO(newexpense));
 
         }
+
+        public class ExpenseModel
+        {
+            public float totalAmount { get; set; }
+            public int GroupId { get; set; }
+        }
+
+        [HttpPut]   //sets amount to 0
+        public async Task<IActionResult> UpdateExpense([FromBody] ExpenseModel expense)
+        {
+            var newexpense = await _repository.GetByGroupIdAndByAmount(expense.GroupId, expense.totalAmount);
+            newexpense.totalAmount = 0;
+            newexpense.GroupId = expense.GroupId;
+
+            _repository.Update(newexpense);
+            await _repository.SaveAsync();
+
+            return Ok(new ExpenseDTO(newexpense));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateExpenseById([FromBody] ExpenseModel expense, int id)
+        {
+            var newexpense = await _repository.GetById(id);
+            newexpense.totalAmount = expense.totalAmount;
+            newexpense.GroupId = expense.GroupId;
+
+            _repository.Update(newexpense);
+            await _repository.SaveAsync();
+
+            return Ok(new ExpenseDTO(newexpense));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteExpenseById(int id)
+        {
+            var expense = await _repository.GetById(id);
+            if (expense == null)
+            {
+                return NotFound("Expense does not exist");
+            }
+            _repository.Delete(expense);
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
 
 
 
