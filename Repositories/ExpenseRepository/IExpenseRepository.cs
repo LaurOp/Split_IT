@@ -11,13 +11,8 @@ namespace Split_IT.Repositories.ExpenseRepository
 
     public interface IExpenseRepository : IGenericRepository<Expense>
     {
-<<<<<<< Updated upstream
-
-        Task<Expense> GetByGroupId(int groupId);
-=======
         Task<List<Expense>> GetAllExpenses();
         Task<List<Expense>> GetByGroupId(int groupId);
->>>>>>> Stashed changes
         Task<Expense> GetById(int id);
         Task<Expense> GetByIdWithAmounts(int id);
         Task<Expense> GetByGroupIdAndByAmount(int groupId, float amount);
