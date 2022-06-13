@@ -23,7 +23,7 @@ namespace Split_IT.Controllers
             _userRepository = userRepository;
             _groupRepository = groupRepository;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> GetAllExpenses()
         {
@@ -122,6 +122,7 @@ namespace Split_IT.Controllers
 
             return NoContent();
         }
+
 
 
 
