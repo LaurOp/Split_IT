@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Proiect_final_DAW.Entities.DTOs;
+using Split_IT.Entities.DTOs;
 using Split_IT.Managers;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Proiect_final_DAW.Controllers
+namespace Split_IT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

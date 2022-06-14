@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Proiect_final_DAW.Entities.DTOs;
 using Split_IT.Entities;
+using Split_IT.Entities.DTOs;
 using Split_IT.Entities.Models;
 using System;
 using System.Collections.Generic;
