@@ -48,14 +48,15 @@ namespace Split_IT.Controllers
             foreach (var group in allGroups)
             {
                 var itsUsers = group.Users;
-                foreach (var itsUser in itsUsers)
-                {
-                    if (itsUser.UserId == user)
+                if (itsUsers != null)
+                    foreach (var itsUser in itsUsers)
                     {
-                        groupsToReturn.Add(new GroupDTO(group));
-                        break;
+                        if (itsUser.UserId == user)
+                        {
+                            groupsToReturn.Add(new GroupDTO(group));
+                            break;
+                        }
                     }
-                }
 
             }
 

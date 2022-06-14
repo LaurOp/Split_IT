@@ -13,6 +13,12 @@ namespace Split_IT.Entities
         public string Name { get; set; }
         public string PhotoUrl { get; set; }
 
-
+        public Group()
+        {
+            Users = new List<UserGroup>();
+            Expenses = new List<Expense>();
+            Name = "defaultName";
+            PhotoUrl = "";
+        }
     }
 }
