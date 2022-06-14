@@ -19,7 +19,7 @@ namespace Split_IT.Entities.DTOs
             this.Users = new List<UserGroup>();
             this.Expenses = new List<Expense>();
             this.Name = group.Name;
-            this.PhotoUrl = group.Name;
+            this.PhotoUrl = group.PhotoUrl;
         }
     }
 }

@@ -17,8 +17,6 @@ namespace Split_IT.Entities
         {
             Users = new List<UserGroup>();
             Expenses = new List<Expense>();
-            Name = "defaultName";
-            PhotoUrl = "";
         }
     }
 }
