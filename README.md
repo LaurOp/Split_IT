@@ -19,8 +19,8 @@ The API uses an SQL SERVER database modeled by the following diagram:
 
 - [x] >10 [user stories](https://trello.com/b/Xs0KtSKs/backlog)
 - [x] [Backlog](https://trello.com/b/Xs0KtSKs/backlog) creation,   [Backlog history](/DocumentationResources/backlog_history.pdf)
-- [ ] [UML](/DocumentationResources/UML.png) diagram
-- [ ] Source control: [Branching](/DocumentationResources/Branching.pdf),  [Merging](/DocumentationResources/Merging.pdf),  Pull requests,  [Solving conflicts](/DocumentationResources/Conflicts.pdf),  [Commiting](/DocumentationResources/Commiting.pdf),  [Code reviewing](/DocumentationResources/CodeReview.png)
+- [x] [UML](/DocumentationResources/UML.png) diagram
+- [x] Source control: [Branching](/DocumentationResources/Branching.pdf),  [Merging](/DocumentationResources/Merging.pdf),  Pull requests,  [Solving conflicts](/DocumentationResources/Conflicts.pdf),  [Commiting](/DocumentationResources/Commiting.pdf),  [Code reviewing](/DocumentationResources/CodeReview.png)
 - [x] [Unit Tests](/UnitTests) -> created using xUnit nuget package
 - [x] [Manual testing](/DocumentationResources/ManualTesting.png) scenarios documented 
 - [x] [Bug reports](/DocumentationResources/Bugs.pdf)
