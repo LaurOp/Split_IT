@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Proiect_final_DAW.Entities;
 using Split_IT.Entities.Models;
 using System;
 using System.Collections.Generic;
