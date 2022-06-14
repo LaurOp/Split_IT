@@ -19,9 +19,13 @@ The API uses an SQL SERVER database modeled by the following diagram:
 
 - [x] >10 [user stories](https://trello.com/b/Xs0KtSKs/backlog)
 - [x] [Backlog](https://trello.com/b/Xs0KtSKs/backlog) creation,   [Backlog history](https://github.com/LaurOp)
-- [ ] [UML](https://github.com/LaurOp) diagram
+- [ ] [UML](/UML.png) diagram
+
+![UML_DIAGRAM](/UML.png)
+
 - [ ] Source control: [Branching](https://github.com/LaurOp),  [Merging](https://github.com/LaurOp),  [Pull requests](https://github.com/LaurOp),  [Solving conflicts](https://github.com/LaurOp),  [Commiting](https://github.com/LaurOp)
 - [x] [Unit Tests](/UnitTests) -> created using xUnit nuget package
+- [x] [Manual testing](https://app.qase.io/project/SPLITIT?suite=1) scenarios documented 
 - [x] [Bug reports](https://app.qase.io/defect/SPLITIT)
 - [x] Build tool : Our backend application was built by the Visual Studio default MSBuild tool, and the unit tests sub-project was created by following [this tutorial](https://github.com/LaurOp)  that uses dotnet.exe powershell build tool
 - [ ] Refactoring
