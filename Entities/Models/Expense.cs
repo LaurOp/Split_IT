@@ -15,7 +15,19 @@ namespace Split_IT.Entities
         public int GroupId { get; set; }
         public Group Group { get; set; }
 
-       
-        
+       public Expense(int id, float totalAmount, ICollection<AmountOwed> amountsOwed, int groupId, Group group)
+        {
+            Id = id;
+            this.totalAmount = totalAmount;
+            AmountsOwed = amountsOwed;
+            GroupId = groupId;
+            Group = group;
+        }
+
+        public Expense()
+        {
+            this.totalAmount = 0;
+            this.AmountsOwed = new List<AmountOwed>();
+        }
     }
 }

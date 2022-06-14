@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Split_IT.Data;
 
 namespace Split_IT.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220614072122_finalDB")]
+    partial class finalDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,6 +110,58 @@ namespace Split_IT.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Proiect_final_DAW.Entities.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Proiect_final_DAW.Entities.UserRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
                     b.Property<int>("Id")
@@ -191,34 +245,6 @@ namespace Split_IT.Migrations
                     b.ToTable("Friendships");
                 });
 
-            modelBuilder.Entity("Split_IT.Entities.Models.Role", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
-
-
             modelBuilder.Entity("Split_IT.Entities.Models.UserAuth", b =>
                 {
                     b.Property<string>("Id")
@@ -284,32 +310,6 @@ namespace Split_IT.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Split_IT.Entities.Models.UserRole", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("RoleId1");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-
             modelBuilder.Entity("Split_IT.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -357,9 +357,7 @@ namespace Split_IT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-
-                    b.HasOne("Split_IT.Entities.Models.Role", null)
-
+                    b.HasOne("Proiect_final_DAW.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -393,9 +391,32 @@ namespace Split_IT.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Proiect_final_DAW.Entities.UserRole", b =>
+                {
+                    b.HasOne("Proiect_final_DAW.Entities.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
+                    b.HasOne("Proiect_final_DAW.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId1");
 
+                    b.HasOne("Split_IT.Entities.Models.UserAuth", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
+                    b.HasOne("Split_IT.Entities.Models.UserAuth", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
 
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
@@ -450,33 +471,6 @@ namespace Split_IT.Migrations
                     b.Navigation("UserTo");
                 });
 
-            modelBuilder.Entity("Split_IT.Entities.Models.UserRole", b =>
-                {
-                    b.HasOne("Split_IT.Entities.Models.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Split_IT.Entities.Models.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId1");
-
-                    b.HasOne("Split_IT.Entities.Models.UserAuth", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Split_IT.Entities.Models.UserAuth", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Split_IT.Entities.UserGroup", b =>
                 {
                     b.HasOne("Split_IT.Entities.Group", "Group")
@@ -496,6 +490,10 @@ namespace Split_IT.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Proiect_final_DAW.Entities.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
 
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
@@ -508,13 +506,6 @@ namespace Split_IT.Migrations
 
                     b.Navigation("Users");
                 });
-
-
-            modelBuilder.Entity("Split_IT.Entities.Models.Role", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
 
             modelBuilder.Entity("Split_IT.Entities.Models.UserAuth", b =>
                 {
