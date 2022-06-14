@@ -22,7 +22,7 @@ The API uses an SQL SERVER database modeled by the following diagram:
 - [ ] [UML](https://github.com/LaurOp) diagram
 - [ ] Source control: [Branching](https://github.com/LaurOp),  [Merging](https://github.com/LaurOp),  [Pull requests](https://github.com/LaurOp),  [Solving conflicts](https://github.com/LaurOp),  [Commiting](https://github.com/LaurOp)
 - [x] [Unit Tests](/UnitTests) -> created using xUnit nuget package
-- [ ] [Bug reports](https://github.com/LaurOp)
+- [x] [Bug reports](https://app.qase.io/defect/SPLITIT)
 - [x] Build tool : Our backend application was built by the Visual Studio default MSBuild tool, and the unit tests sub-project was created by following [this tutorial](https://github.com/LaurOp)  that uses dotnet.exe powershell build tool
 - [ ] Refactoring
 - [x] Followed the [Microsoft C# Code standards](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
