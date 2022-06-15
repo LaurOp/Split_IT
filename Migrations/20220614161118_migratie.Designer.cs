@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Split_IT.Data;
 
 namespace Split_IT.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20220614161118_migratie")]
+    partial class migratie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,7 +220,6 @@ namespace Split_IT.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-
             modelBuilder.Entity("Split_IT.Entities.Models.UserAuth", b =>
                 {
                     b.Property<string>("Id")
@@ -309,7 +310,6 @@ namespace Split_IT.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-
             modelBuilder.Entity("Split_IT.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -357,9 +357,7 @@ namespace Split_IT.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-
                     b.HasOne("Split_IT.Entities.Models.Role", null)
-
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -392,10 +390,6 @@ namespace Split_IT.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
-
-
-
-
 
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
@@ -496,7 +490,6 @@ namespace Split_IT.Migrations
                     b.Navigation("User");
                 });
 
-
             modelBuilder.Entity("Split_IT.Entities.Expense", b =>
                 {
                     b.Navigation("AmountsOwed");
@@ -509,12 +502,10 @@ namespace Split_IT.Migrations
                     b.Navigation("Users");
                 });
 
-
             modelBuilder.Entity("Split_IT.Entities.Models.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });
-
 
             modelBuilder.Entity("Split_IT.Entities.Models.UserAuth", b =>
                 {

@@ -1,4 +1,4 @@
-﻿using Proiect_final_DAW.Entities.DTOs;
+﻿using Split_IT.Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
